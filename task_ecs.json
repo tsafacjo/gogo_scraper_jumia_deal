@@ -6,41 +6,24 @@
       "dnsSearchDomains": null,
       "environmentFiles": null,
       "logConfiguration": null,
-      "entryPoint": [
-        "sh",
-        "-c"
-      ],
+      "entryPoint": null,
       "portMappings": [],
-      "command": [
-        "scrapy",
-        "crawl jumia"
-      ],
+      "command": null,
       "linuxParameters": null,
-      "cpu": 1,
+      "cpu": 0,
       "environment": [],
-      "resourceRequirements": [
-        {
-          "type": "GPU",
-          "value": "1"
-        }
-      ],
-      "ulimits": [
-        {
-          "name": "cpu",
-          "softLimit": 1,
-          "hardLimit": 1
-        }
-      ],
+      "resourceRequirements": null,
+      "ulimits": null,
       "dnsServers": null,
       "mountPoints": [],
       "workingDirectory": null,
       "secrets": null,
       "dockerSecurityOptions": null,
-      "memory": 1024,
+      "memory": 128,
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "196879895999.dkr.ecr.eu-west-3.amazonaws.com/gogoscraper:d5af5f83ef3d96e002e2cea3775fd2552daff6ee",
+      "image": "196879895999.dkr.ecr.eu-west-3.amazonaws.com/gogoscraper",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -57,18 +40,18 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "GOGOSCRAPER"
+      "name": "gogoscraper"
     }
   ],
   "placementConstraints": [],
-  "memory": "1024",
+  "memory": null,
   "taskRoleArn": "arn:aws:iam::196879895999:role/ecsTaskExecutionRole",
   "compatibilities": [
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:eu-west-3:196879895999:task-definition/gogoscraper:1",
-  "family": "gogoscraper",
+  "taskDefinitionArn": "arn:aws:ecs:eu-west-3:196879895999:task-definition/gogoscraper2:1",
+  "family": "gogoscraper2",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -87,21 +70,15 @@
       "targetType": null,
       "value": null,
       "name": "ecs.capability.execution-role-ecr-pull"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
     }
   ],
   "pidMode": null,
   "requiresCompatibilities": [
-    "EXTERNAL"
+    "EC2"
   ],
   "networkMode": null,
   "runtimePlatform": null,
-  "cpu": "128",
+  "cpu": null,
   "revision": 1,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
