@@ -15,6 +15,7 @@ NEWSPIDER_MODULE = 'tutorial.spiders'
 FEED_FORMAT = "json"
 FEED_URI = "jumia_posts.json"
 
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
 
