@@ -1,5 +1,5 @@
 python-dateutil==2.4.2
 Scrapy==1.0.4
 XlsxWriter==0.7.7
-boto==4.5.6
-boto3==7.8.9
+boto==2.49.0
+
