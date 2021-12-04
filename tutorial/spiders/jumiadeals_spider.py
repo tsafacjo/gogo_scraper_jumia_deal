@@ -40,7 +40,7 @@ class QuotesSpider(scrapy.Spider):
             pass
         else :    
           QuotesSpider.is_first_run= True    
-          for page_number in  range(0, 4):#range(0,int(pages[-2].get())):
+          for page_number in  range(0, 16):#range(0,int(pages[-2].get())):
                 print("url "+self.root_url+"/"+category+"?page="+str(page_number))
                 yield scrapy.Request(self.root_url+"/"+category+"?page="+str(page_number), callback=self.parse)
 

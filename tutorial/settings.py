@@ -1,3 +1,5 @@
+from datetime import datetime
+
 # Scrapy settings for tutorial project
 #
 # For simplicity, this file contains only settings considered important or
@@ -6,7 +8,7 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
+datetime.today().strftime('%Y-%m-%d')
 BOT_NAME = 'tutorial'
 
 SPIDER_MODULES = ['tutorial.spiders']
@@ -15,7 +17,14 @@ NEWSPIDER_MODULE = 'tutorial.spiders'
 FEED_FORMAT = "json"
 FEED_URI = "jumia_posts.json"
 
+AWS_ACCESS_KEY_ID = 'AKIAS3VXUZW7ST7TNAM3'
+AWS_SECRET_ACCESS_KEY= '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'
 
+FEED_URI='s3://gogolandprice-dev/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
+
+ITEM_PIPELINE = {
+'scrapy.pipelines.files.S3FilesStore': 1
+}
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
 
