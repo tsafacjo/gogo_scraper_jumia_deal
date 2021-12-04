@@ -1,11 +1,13 @@
 import scrapy
 #from tutorial import  PostItem
-from datetime import datetime
+from datetime import datetime,timedelta
 from tutorial.items import PostItem
 
 class QuotesSpider(scrapy.Spider):
     name = "jumia"
     root_url="https://www.jumia.cm/"
+    is_time_reached=False
+    is_first_run=False
 
     def start_requests(self):
 
@@ -18,6 +20,8 @@ class QuotesSpider(scrapy.Spider):
         """
         main parse
         """
+        # keywords
+        category="immobilier"
         # get  all the single post
         posts = response.css("a.post-link")
 
@@ -31,10 +35,14 @@ class QuotesSpider(scrapy.Spider):
 
         print("nb articles  "+str(len(pages)))
         print("last element  "+str(pages[-2].get()))
-        return 
-        for page in pages[0:3] :
-            print("url "+page.attrib['href'])
-            yield scrapy.Request(self.root_url+"/"+page.attrib['href'], callback=self.parse)
+        # 
+        if QuotesSpider.is_first_run :
+            pass
+        else :    
+          QuotesSpider.is_first_run= True    
+          for page_number in  range(0, 4):#range(0,int(pages[-2].get())):
+                print("url "+self.root_url+"/"+category+"?page="+str(page_number))
+                yield scrapy.Request(self.root_url+"/"+category+"?page="+str(page_number), callback=self.parse)
 
 
     def parse_pagination(self, response):
@@ -52,7 +60,7 @@ class QuotesSpider(scrapy.Spider):
         category = response.css("nav ul  li a span::text")[7].get(),
         transactionType =  response.css("h3 span::text")[0].get(),
         area=  response.css("h3 span::text")[1].get()  if response.css("h3 span::text")[0].get() in ["vente"] else response.css("h3 span::text")[2].get(),
-        publishedDate = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")),
+        publishedDate = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
         price =  response.css("aside span span")[0].attrib['content'],
         priceCurency = response.css("aside span span")[1].attrib['content'], 
         phoneNumber = response.css("div.phone-box a::text")[0].get(),
