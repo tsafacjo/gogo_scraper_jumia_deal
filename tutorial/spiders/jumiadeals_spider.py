@@ -6,7 +6,7 @@ from tutorial.items import PostItem
 class QuotesSpider(scrapy.Spider):
     name = "jumia"
     root_url="https://www.jumia.cm/"
-    is_time_reached=False
+    is_yesterday_reached=False
     is_first_run=False
 
     def start_requests(self):
@@ -35,12 +35,16 @@ class QuotesSpider(scrapy.Spider):
 
         print("nb articles  "+str(len(pages)))
         print("last element  "+str(pages[-2].get()))
-        # 
+
+        # if we reach yesterday we skip the processing
+        if QuotesSpider.is_yesterday_reached :
+            return
+        # we  avoid infinite loop
         if QuotesSpider.is_first_run :
             pass
         else :    
           QuotesSpider.is_first_run= True    
-          for page_number in  range(0, 16):#range(0,int(pages[-2].get())):
+          for page_number in   range(0,int(pages[-2].get())):#range(0,int(pages[-2].get())):
                 print("url "+self.root_url+"/"+category+"?page="+str(page_number))
                 yield scrapy.Request(self.root_url+"/"+category+"?page="+str(page_number), callback=self.parse)
 
@@ -52,7 +56,13 @@ class QuotesSpider(scrapy.Spider):
         print(" "+str(response.css("h1 span::text").get()))
 
     def parse_post(self, response):
-  
+
+        
+        # if we reach limit we quit
+        if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get() :
+            QuotesSpider.is_yesterday_reached =True
+            return
+        
         return PostItem(id = response.url,
 		title = str(response.css("h1 span::text").get()),
 		description = response.css("div.post-text-content p::text").get(),

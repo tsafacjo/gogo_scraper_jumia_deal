@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import os
 # Scrapy settings for tutorial project
 #
 # For simplicity, this file contains only settings considered important or
@@ -17,10 +17,10 @@ NEWSPIDER_MODULE = 'tutorial.spiders'
 FEED_FORMAT = "json"
 FEED_URI = "jumia_posts.json"
 
-AWS_ACCESS_KEY_ID = 'AKIAS3VXUZW7ST7TNAM3'
-AWS_SECRET_ACCESS_KEY= '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'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
-FEED_URI='s3://gogolandprice-dev/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
+FEED_URI='s3://gogolandprice-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
 
 ITEM_PIPELINE = {
 'scrapy.pipelines.files.S3FilesStore': 1
