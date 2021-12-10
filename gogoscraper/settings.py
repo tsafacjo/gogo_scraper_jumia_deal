@@ -9,10 +9,10 @@ import os
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 datetime.today().strftime('%Y-%m-%d')
-BOT_NAME = 'tutorial'
+BOT_NAME = 'gogoscraper'
 
-SPIDER_MODULES = ['tutorial.spiders']
-NEWSPIDER_MODULE = 'tutorial.spiders'
+SPIDER_MODULES = ['gogoscraper.spiders']
+NEWSPIDER_MODULE = 'gogoscraper.spiders'
 #Export as CSV Feed
 FEED_FORMAT = "json"
 FEED_URI = "jumia_posts.json"

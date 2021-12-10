@@ -6,11 +6,10 @@
 import scrapy
 
 
-class TutorialItem(scrapy.Item):
+class GogoscraperItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
-
 class PostItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()

@@ -1,7 +1,7 @@
 import scrapy
 #from tutorial import  PostItem
 from datetime import datetime,timedelta
-from tutorial.items import PostItem
+from gogoscraper.items import PostItem
 
 class QuotesSpider(scrapy.Spider):
     name = "jumia"
