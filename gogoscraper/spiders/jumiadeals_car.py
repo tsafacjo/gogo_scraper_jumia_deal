@@ -66,7 +66,7 @@ class QuotesSpider(scrapy.Spider):
 
         
         # if we reach limit we quit
-        if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get() :
+        if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get()  or  "Aujourd'hui" not  in str(datetime.now().year)+response.css("dd time::text")[0].get() :
             QuotesSpider.is_yesterday_reached =True
             return
         
