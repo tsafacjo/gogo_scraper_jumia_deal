@@ -14,18 +14,21 @@ BOT_NAME = 'gogoscraper'
 SPIDER_MODULES = ['gogoscraper.spiders']
 NEWSPIDER_MODULE = 'gogoscraper.spiders'
 #Export as CSV Feed
-FEED_FORMAT = "json"
-FEED_URI = "jumia_posts.json"
+FEED_FORMAT = "csv"
+FEED_URI = "jumia_cars.csv"
 
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
+#AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
+#AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
-FEED_URI='s3://gogolandprice-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
+#FEED_URI='s3://gogolandprice-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","AKIASTLQHKTBFUQ3UNWQ")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","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") 
+
+FEED_URI='s3://akoassurance-'+os.environ.get("ENV","dev")+'/raw_layer/cars-to-sell/date='+ datetime.today().strftime('%Y-%m-%d-%H-%M-%S')+'.json'
 
 ITEM_PIPELINE = {
 'scrapy.pipelines.files.S3FilesStore': 1
 }
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules

@@ -5,7 +5,7 @@ from gogoscraper.items import PostItem
 
 class QuotesSpider(scrapy.Spider):
     name = "jumia"
-    root_url="https://www.jumia.cm/"
+    root_url="https://www.jumia.cm"
     is_yesterday_reached=False
     is_first_run=False
 
@@ -27,7 +27,7 @@ class QuotesSpider(scrapy.Spider):
 
         for post in posts :
            ## print("short url "+post.attrib['href']) 
-            yield scrapy.Request(self.root_url+"/"+post.attrib['href'], callback=self.parse_post)
+            yield scrapy.Request(self.root_url+""+post.attrib['href'], callback=self.parse_post)
         #pagination 
         #next_url=""
         ##self.parse(next_url)
@@ -52,24 +52,25 @@ class QuotesSpider(scrapy.Spider):
     def parse_pagination(self, response):
         for post in posts :
            ## print("short url "+post.attrib['href']) 
+            print(" là là  "+self.root_url+"r"+post.attrib['href'])
             yield scrapy.Request(self.root_url+"/"+post.attrib['href'], callback=self.parse_post)
+            
         print(" "+str(response.css("h1 span::text").get()))
 
     def parse_post(self, response):
-
-        
+        """
         # if we reach limit we quit
         if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get() :
             QuotesSpider.is_yesterday_reached =True
             return
-        
+        """ 
         return PostItem(id = response.url,
 		title = str(response.css("h1 span::text").get()),
 		description = response.css("div.post-text-content p::text").get(),
         town = response.css("dd span::text")[1].get(),
-        category = response.css("nav ul  li a span::text")[7].get(),
+        category = response.css("nav ul  li a span::text")[9].get(),
         transactionType =  response.css("h3 span::text")[0].get(),
-        area=  response.css("h3 span::text")[1].get()  if response.css("h3 span::text")[0].get() in ["vente"] else response.css("h3 span::text")[2].get(),
+        area=  response.css("div.new-attr-style h3 span::text")[1].get(), # if response.css("h3 span::text")[0].get() in ["Vente"] else response.css("h3 span::text")[2].get(),
         publishedDate = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
         price =  response.css("aside span span")[0].attrib['content'],
         priceCurency = response.css("aside span span")[1].attrib['content'], 
