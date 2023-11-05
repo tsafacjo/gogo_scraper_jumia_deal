@@ -17,10 +17,10 @@ NEWSPIDER_MODULE = 'gogoscraper.spiders'
 FEED_FORMAT = "csv"
 FEED_URI = "jumia_cars.csv"
 
-#AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
-#AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
-#FEED_URI='s3://gogolandprice-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
+FEED_URI='s3://gogolandprice-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","AKIASTLQHKTBFUQ3UNWQ")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","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") 
 

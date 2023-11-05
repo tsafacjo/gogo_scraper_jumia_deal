@@ -40,7 +40,7 @@ class QuotesSpider(scrapy.Spider):
         print("last element  "+str(pages[-2].get()))
 
         # if we reach yesterday we skip the processing
-        #if QuotesSpider.is_yesterday_reached :
+        #if self.is_yesterday_reached :
         #    return
         # we  avoid infinite loop
         if QuotesSpider.is_first_run :
@@ -51,7 +51,7 @@ class QuotesSpider(scrapy.Spider):
                 print("url "+self.root_url+"/"+category+"?page="+str(page_number))
                 yield scrapy.Request(self.root_url+"/"+"?page="+str(page_number), callback=self.parse)
                         # if we reach yesterday we skip the processing
-                if QuotesSpider.is_yesterday_reached :
+                if self.is_yesterday_reached :
                    return
 
 
@@ -67,9 +67,10 @@ class QuotesSpider(scrapy.Spider):
         
         # if we reach limit we quit
         if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get()  or  "Aujourd'hui" not  in str(datetime.now().year)+response.css("dd time::text")[0].get() :
-            QuotesSpider.is_yesterday_reached =True
+            self.is_yesterday_reached =True
+            print("***************___________________________*************")
             return
-        
+        length_info = len(response.css("div.new-attr-style h3 span::text")) 
         return VehiculescrapyItem(
         id = response.url,
 		title = str(response.css("h1 span::text").get()),
@@ -86,7 +87,7 @@ class QuotesSpider(scrapy.Spider):
         transmission =  response.css("div.new-attr-style h3 span::text")[1].get(),
         carburant=  response.css("div.new-attr-style h3 span::text")[2].get(),
         annee = response.css("div.new-attr-style h3 span::text")[3].get(),
-        kilometrage = response.css("div.new-attr-style h3 span::text")[4].get(),
+        kilometrage =    response.css("div.new-attr-style h3 span::text")[4].get() if length_info>= 5 else '',
         seller = response.css("div dl  span::text ")[0].get(),
         url = response.url
             )
