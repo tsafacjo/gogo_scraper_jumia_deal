@@ -47,12 +47,11 @@ class QuotesSpider(scrapy.Spider):
             pass
         else :    
           QuotesSpider.is_first_run= True    
-          for page_number in   range(0,int(pages[-2].get())):#range(0,int(pages[-2].get())):
+          for page_number in   range(0,10): #int(pages[-2].get())):#range(0,int(pages[-2].get())):
+                print("Yesterday  **"+str(self.is_yesterday_reached))
                 print("url "+self.root_url+"/"+category+"?page="+str(page_number))
                 yield scrapy.Request(self.root_url+"/"+"?page="+str(page_number), callback=self.parse)
-                        # if we reach yesterday we skip the processing
-                if self.is_yesterday_reached :
-                   return
+                # if we reach yesterday we skip the processing
 
 
     def parse_pagination(self, response):
@@ -66,10 +65,10 @@ class QuotesSpider(scrapy.Spider):
 
         
         # if we reach limit we quit
-        if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get()  or  "Aujourd'hui" not  in str(datetime.now().year)+response.css("dd time::text")[0].get() :
-            self.is_yesterday_reached =True
-            print("***************___________________________*************")
-            return
+        #         if "Hier" in str(datetime.now().year)+response.css("dd time::text")[0].get()  or  "Aujourd'hui" not  in str(datetime.now().year)+response.css("dd time::text")[0].get() :
+        #             self.is_yesterday_reached =True
+        # 
+        #             return
         length_info = len(response.css("div.new-attr-style h3 span::text")) 
         return VehiculescrapyItem(
         id = response.url,
@@ -78,7 +77,7 @@ class QuotesSpider(scrapy.Spider):
         town = response.css("dd span::text")[1].get(),
         category = response.css("main div nav ul  li a span::text")[6].get(),
         transactionType =  response.css("h3 span::text")[0].get(),
-        publishedDate = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
+        publishedDate = response.css("dd time::text")[0].get(), #str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. #%d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
         price =  response.css("aside span span")[0].attrib['content'],
         priceCurency = response.css("aside span span")[1].attrib['content'], 
         phoneNumber = response.css("div.phone-box a::text")[0].get(),
