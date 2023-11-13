@@ -2,9 +2,11 @@
 
 echo "start $0"
 
-cd /home/tsafacjo/Documents/workspace/gogoScraper
-
 pwd 
+
+ls
+
+
 
 pid=$$ 
 

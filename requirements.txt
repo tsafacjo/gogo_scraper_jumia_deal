@@ -1,5 +1,10 @@
-python-dateutil==2.4.2
-Scrapy==2.5.1
-XlsxWriter==0.7.7
-boto==2.49.0
+#python-dateutil
+Scrapy
+#XlsxWriter
+boto
+botocore
+# ImportError: cannot import name 'SSLv3_METHOD' from 'OpenSSL.SSL'
+pyopenssl==22.0.0
 
+# AttributeError: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
+#cryptography==38.0.4

@@ -14,15 +14,15 @@ BOT_NAME = 'gogoscraper'
 SPIDER_MODULES = ['gogoscraper.spiders']
 NEWSPIDER_MODULE = 'gogoscraper.spiders'
 #Export as CSV Feed
-FEED_FORMAT = "csv"
-FEED_URI = "jumia_cars.csv"
-
+FEED_FORMAT = "json"
+FEED_URI = "jumia_cars.json"
+AWS_REGION_NAME = ""
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
 FEED_URI='s3://gogocar-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","AKIASTLQHKTBFUQ3UNWQ")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","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") 
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
 #FEED_URI='s3://gogocar-'+os.environ.get("ENV","dev")+'/raw_layer/cars-to-sell/date='+ datetime.today().strftime('%Y-%m-%d-%H-%M-%S')+'.json'
 

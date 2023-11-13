@@ -1,4 +1,5 @@
 import scrapy
+import os
 #from tutorial import  PostItem
 from datetime import datetime,timedelta
 from gogoscraper.items import VehiculescrapyItem
@@ -11,6 +12,11 @@ class QuotesSpider(scrapy.Spider):
     is_first_run=False
 
     def start_requests(self):
+
+        
+        print("test "+os.environ.get("AWS_ACCESS_KEY_ID","vide"))
+
+        print("test "+os.environ.get("AWS_SECRET_ACCESS_KEY","vide"))
 
         urls = ["https://www.jumia.cm/vehicules"
         ]
@@ -47,7 +53,7 @@ class QuotesSpider(scrapy.Spider):
             pass
         else :    
           QuotesSpider.is_first_run= True    
-          for page_number in   range(0,10): #int(pages[-2].get())):#range(0,int(pages[-2].get())):
+          for page_number in   range(0,35): #int(pages[-2].get())):#range(0,int(pages[-2].get())):
                 print("Yesterday  **"+str(self.is_yesterday_reached))
                 print("url "+self.root_url+"/"+category+"?page="+str(page_number))
                 yield scrapy.Request(self.root_url+"/"+"?page="+str(page_number), callback=self.parse)
