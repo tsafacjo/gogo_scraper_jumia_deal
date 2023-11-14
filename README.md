@@ -4,7 +4,7 @@ This a simple python scraper to get different jumia  deal information using scra
 
 ## Architecture 
 
-![Architecture de gogo car trends ](imag/gogo_car_analyzer.jpg "Architecture")
+![Architecture de gogo car trends ](img/gogo_car_analyzer.jpg "Architecture")
 
 
 ## Build:
