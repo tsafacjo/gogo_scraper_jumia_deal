@@ -1,9 +1,14 @@
-FROM python:3.8
+FROM python:3.8.3
  
 WORKDIR /app
 COPY . /app
  
-RUN pip install scrapy
+RUN pip3 install Scrapy
+
+RUN pip3 install boto
+
+RUN pip3 install botocore
+
+#RUN pip3 install --no-cache-dir -r requirements.txt
  
-ENTRYPOINT ["scrapy crawl "]
-CMD ["jumia"]
+CMD ["scrapy", "crawl", "jumia_car"] 

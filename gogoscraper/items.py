@@ -6,7 +6,7 @@
 import scrapy
 
 
-class TutorialItem(scrapy.Item):
+class GogoscraperItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
@@ -26,14 +26,26 @@ class PostItem(scrapy.Item):
     priceCurency = scrapy.Field()
     phoneNumber = scrapy.Field()
     url = scrapy.Field()
-    title = scrapy.Field()
-    description = scrapy.Field()
+
+class VehiculescrapyItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    id = scrapy.Field()
+    seller = scrapy.Field() 
+    mark = scrapy.Field()
+    model = scrapy.Field()
     town = scrapy.Field()
     category = scrapy.Field()
-    transactionType =  scrapy.Field()
-    area=  scrapy.Field()
+    transmission =  scrapy.Field()
+    carburant=  scrapy.Field()
+    annee = scrapy.Field()
+    kilometrage = scrapy.Field()
     publishedDate = scrapy.Field()
+    transactionType=scrapy.Field()
     price =  scrapy.Field()
     priceCurency = scrapy.Field()
     phoneNumber = scrapy.Field()
+    title = scrapy.Field()
+    description = scrapy.Field()
     url = scrapy.Field()
+    transmission = scrapy.Field()
