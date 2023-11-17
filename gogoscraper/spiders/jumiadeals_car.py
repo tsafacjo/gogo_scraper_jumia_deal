@@ -42,6 +42,7 @@ class QuotesSpider(scrapy.Spider):
         ##self.parse(next_url)
         pages =response.css("ul.pagination li a::text")
 
+        print("nb post  "+str(len(posts)))
         print("nb articles  "+str(len(pages)))
         print("last element  "+str(pages[-2].get()))
 
@@ -58,7 +59,7 @@ class QuotesSpider(scrapy.Spider):
                 print("url "+self.root_url+"/"+category+"?page="+str(page_number))
                 yield scrapy.Request(self.root_url+"/"+"?page="+str(page_number), callback=self.parse)
                 # if we reach yesterday we skip the processing
-
+        return  posts
 
     def parse_pagination(self, response):
         for post in posts :
