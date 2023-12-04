@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: gogoscraper
-            image: tsafacjo/jumia-car-scrap:0.9
+            image: tsafacjo/jumia-car-scrap:0.91
             env:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
