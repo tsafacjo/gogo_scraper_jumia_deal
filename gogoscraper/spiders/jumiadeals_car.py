@@ -76,7 +76,17 @@ class QuotesSpider(scrapy.Spider):
         #             self.is_yesterday_reached =True
         # 
         #             return
-        length_info = len(response.css("div.new-attr-style h3 span::text")) 
+        length_info = len(response.css("div.new-attr-style h3 span::text"))
+        input_format = "%Y%b. %d, %H:%M"
+        output_format = "%Y-%m-%d %H:%M"
+
+        # Parse the input string
+        raw_published_date = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d"))
+        parsed_date = datetime.strptime(raw_published_date, input_format)
+
+        # Convert to desired format
+        formated_date_str = parsed_date.strftime(output_format)      
+         
         return VehiculescrapyItem(
         id = response.url,
 		title = str(response.css("h1 span::text").get()),
@@ -84,7 +94,7 @@ class QuotesSpider(scrapy.Spider):
         town = response.css("dd span::text")[1].get(),
         category = response.css("main div nav ul  li a span::text")[6].get(),
         transactionType =  response.css("h3 span::text")[0].get(),
-        publishedDate = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
+        publishedDate = formated_date_str,
         price =  response.css("aside span span")[0].attrib['content'],
         priceCurency = response.css("aside span span")[1].attrib['content'], 
         phoneNumber = response.css("div.phone-box a::text")[0].get(),
