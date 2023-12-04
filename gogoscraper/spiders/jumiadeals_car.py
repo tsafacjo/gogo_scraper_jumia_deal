@@ -84,7 +84,7 @@ class QuotesSpider(scrapy.Spider):
         town = response.css("dd span::text")[1].get(),
         category = response.css("main div nav ul  li a span::text")[6].get(),
         transactionType =  response.css("h3 span::text")[0].get(),
-        publishedDate = response.css("dd time::text")[0].get(), #str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. #%d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
+        publishedDate = str(datetime.now().year)+response.css("dd time::text")[0].get().replace("Aujourd'hui",datetime.today().strftime("%b. %d")).replace("Hier",(datetime.today()- timedelta(days=1)).strftime("%b. %d")),
         price =  response.css("aside span span")[0].attrib['content'],
         priceCurency = response.css("aside span span")[1].attrib['content'], 
         phoneNumber = response.css("div.phone-box a::text")[0].get(),
