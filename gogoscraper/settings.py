@@ -20,7 +20,7 @@ AWS_REGION_NAME = ""
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
-FEED_URI='s3://gogocar-'+os.environ.get("ENV","dev")+'/raw/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
+FEED_URI='s3://mia-cars-'+os.environ.get("ENV","dev")+'-raw/jumia/date='+datetime.today().strftime('%Y-%m-%d')+'.json'
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID","")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY","") 
 
